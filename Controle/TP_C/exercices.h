@@ -29,6 +29,8 @@ int are_books_greater(Book *b1, Book *b2) {
     return b1->pages > b2->pages;
 }
 
+// Une fonction de comparaisoin pourrait renvoyer 1 si obj1 < obj2, -1 si obj1 > obj2 et 0 si égaux.
+
 void swap(void *obj1, void *obj2, size_t size) {
     char temp[size];
     memcpy(temp, obj1, size);

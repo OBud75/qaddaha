@@ -3,7 +3,9 @@
 
 int main(int argc, char *argv[]) {
     int *Buffer;
-    Buffer = malloc(sizeof(int));   
+    Buffer = malloc(sizeof(int));
+    // check si malloc a bien fonctionné
+    // if (Buffer == NULL) {...}
 
     printf("Buffer %ls\n", Buffer);
     printf("&Buffer %p\n", &Buffer);

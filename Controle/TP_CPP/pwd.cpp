@@ -24,6 +24,7 @@ void Password::encrypt(const std::string &password) {
 }
 
 std::string Password::str() const {
+    // On ne devrait pas avoir accès au mot de passe en clair
     return _raw_value;
 }
 

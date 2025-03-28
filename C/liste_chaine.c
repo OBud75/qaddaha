@@ -60,6 +60,7 @@ int main() {
 
     // Free the linked list
     freeList(head);
+    // Pas vraiment utile de free en fin de programme mais ca ne peut pas faire de mal
 
     return 0;
 }

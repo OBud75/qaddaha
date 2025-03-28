@@ -78,6 +78,11 @@ int main() {
         printf("%d ", people[i].age);
     }
     printf("\n");
+    // On peut éventuellement itérer sur les objets via leurs pointeurs
+    // Un peu comme un foreach en JS ou for elem in elems en Python :
+    for (Person *p = people; p < people + sizeof(people) / sizeof(Person); p++) {
+        printf("%d ", p->age);
+    }
 
     return 0;
 }
