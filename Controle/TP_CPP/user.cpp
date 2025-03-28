@@ -31,7 +31,7 @@ std::shared_ptr<User> User::get(int id) {
     }
 }
 // Dans l'idée je pensais à un vector<unique_ptr<User>>
-// Dans tous les cas vous êtes le seul sur les 2 sections à avoir pensé à cette approche.
+// Dans tous les cas vous êtes un des seuls sur les 2 sections à avoir pensé à cette approche.
 // Ce n'est pas forcément mieux que de renvoyer directement un smart pointer ni même une
 // copie vu que l'application est très simple mais c'est bien ca que j'attendais.
 // Je pensais plutôt à des pointeurs uniques pour que le conteneur soit dernier responsable
