@@ -153,6 +153,13 @@ def convert_shape_format(piece):
 
     return positions
 
+# cela pourrait (devrait?) être une méthode de la classe Piece
+# def convert_shape_format(self):
+#    positions = []
+#    format = self.shape[self.rotation % len(self.shape)]
+# ...
+
+
 def valid_space(piece, grid):
     accepted_positions = [[(x, y) for x in range(10) if grid[y][x] == (0, 0, 0)] for y in range(20)]
     accepted_positions = [x for item in accepted_positions for x in item]
@@ -165,6 +172,8 @@ def valid_space(piece, grid):
             return False
     return True
 
+# Idem
+
 def check_lost(positions):
     for pos in positions:
       x, y = pos
@@ -175,11 +184,24 @@ def check_lost(positions):
 def get_shape():
     return Piece(5, 0, random.choice(shapes))
 
+# On peut (mais pas forcément en fonction du contexte) en faire une méthode de classe
+# à l'image d'un constructeur.
+# @classmethod
+# def get_shape(cls, shapes):
+#    return cls(5, 0, random.choice(shapes)) 
+
+# On peut aussi penser à factoriser le code petit à petit et passer
+# x et y en paramètre de la méthode (ou au moins indiquer à quoi cela correspond).
+
 def draw_text_middle(text, size, color, surface):
     font = pygame.font.SysFont('comicsans', size, bold=True)
     label = font.render(text, 1, color)
 
     surface.blit(label, (top_left_x + play_width/2 - (label.get_width() / 2), top_left_y + play_height/2 - label.get_height()/2))
+    # On préfère souvent créer un mapping entre blocs et pixels
+    # typiquement une fonction block_to_pixel qui prend en paramètre un bloc (x, y)
+    # et renvoie les coordonnées du pixel correspondant.
+    # Cela permet ensuite de tout factoriser proprement et ne pas tout casser si on change de résolution
 
 def draw_grid(surface, grid):
     sx = top_left_x
@@ -205,6 +227,7 @@ def clear_rows(grid, locked):
 
     if increment > 0:
       for key in sorted(list(locked), key=lambda x: x[1])[::-1]:
+        # La fonction sorted accepte un argument "reverse" (True ou False par défaut)
         x, y = key
         if y < ind:
             newKey = (x, y + increment)

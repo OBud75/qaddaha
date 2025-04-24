@@ -49,3 +49,9 @@ _start:
     mov eax, 1
     xor ebx, ebx
     int 0x80
+
+; On peut créer des fonctions (exit, get_input ...) et les appeler des _start,
+; Le code devient plus "humain", on peut supprimer les commentaires redondants
+; ce qui évite au passage de la maintenance inutile et des erreurs potentielles
+; (un commentaire peut mentir sur ce qu'il fait, ce sera souvent plus simple de
+; bien nommer la fonction et vérifier si le code fait bien ce que la fonction annonce faire)

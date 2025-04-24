@@ -17,3 +17,19 @@ for link in $site;do
 	fi
 done
 
+
+# Que se passe t'il si le titre de la page est "L'avenir de Westen UNION" ?
+# Cela va trigger le echo "SQL injection detected" alors que ce n'est pas une injection sql
+# Potentiellement on se retrouve avec des faux positifs dans les logs etc.
+
+# C'est le fait de concaténer les arguments à la requête sql qui permet des injections sql
+# Typiquement si $1=toto, $2=toto et $3 = "toto'); DROP TABLE data;" 
+# La requête sql devient
+# INSERT INTO data (url, title, description) values ('toto', 'toto', 'toto'); DROP TABLE data;
+
+# Pour éviter cela il faut utiliser des requêtes préparées
+# "INSERT INTO data (url, title, description) values (?, ?, ?);" "$1" "$2" "$3"
+
+# Ansi, si $3 = "toto'); DROP TABLE data;"
+# La requête sql devient
+# INSERT INTO data (url, title, description) values ("toto", "toto", "toto'); DROP TABLE data;");
