@@ -46,3 +46,9 @@ std::shared_ptr<User> User::get(int id) {
 // on ajoute l'user au conteneur et on renvoie un smart pointer (ou pas en fonction des besoin)
 // de l'objet qu'on vient d'ajouter au conteneur.
 // L'ajout des User dans le conteneur pourrait même se faire dans le constructeur de User.
+
+// Dernier détail : il est souvent préférable de mettre le conteneur dans la classe.
+// D'une manière générale en orienté objet on n'aime pas les variables qui "se baladent" dans le code.
+// C'est également valable en Python etc où par exemple l'utilisation de "global" est souvent signe d'un design un peu bancal.
+// Comme toujours cela dépendra du contexte, si vous avez une excellente raison de le faire allez y.
+// On peut donc avoir static User::cache par exemple
