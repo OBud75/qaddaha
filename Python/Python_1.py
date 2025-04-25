@@ -374,3 +374,59 @@ def main_menu():
 win = pygame.display.set_mode((s_width, s_height))
 pygame.display.set_caption('Tetris')
 main_menu()
+
+
+
+
+
+
+
+
+# A titre d'exemple je vous met quelques morceaux d'un projet que j'avais fait il y a pas mal de temps maintenant
+from PIL import Image
+import pygame
+
+class GraphicInterface:
+    def __init__(self, map):
+        self.map = map
+        self.block_size = Image.open(constants.WALL_IMAGE).size[0]
+
+        width_pixels = self.block_to_pixels(self.map.width)
+        height_pixels = self.block_to_pixels(self.map.height)
+        self.window = pygame.display.set_mode((width_pixels, height_pixels))
+
+        pygame.display.set_caption(map.name)
+        pygame.display.set_icon(pygame.image.load(constants.MAIN_IMAGE))
+
+    def block_to_pixels(self, block):
+        return round(block * self.block_size)
+
+    def display(self, image, x_block, y_block):
+        x_pixels = self.block_to_pixels(x_block)
+        y_pixels = self.block_to_pixels(y_block)
+        self.window.blit(pygame.image.load(image), (y_pixels, x_pixels))
+
+    def show_text(self, text, x_block=4, y_block=4, size=0.75, delay=0, r_color=255, g_color=255, b_color=255):
+        font = pygame.font.Font("freesansbold.ttf", self.block_to_pixels(size))
+        text = font.render(text, True, (r_color, g_color, b_color))
+        self.window.blit(text, (self.block_to_pixels(x_block), self.block_to_pixels(y_block)))
+        pygame.display.flip()
+        pygame.time.delay(delay)
+
+    def game_loop(self):
+        pygame.init()
+        pygame.mixer.music.load(constants.MUSIC)
+        pygame.mixer.music.play(loops=-1)
+        self.load_all()
+
+        while not self.map.game_over:
+            # Event handler code
+            # On peut éventuellement injecter la logique en paramètre
+            pygame.display.flip()
+        pygame.quit()
+
+# La classe est factorisée de telle sorte qu'elle est utilisable avec n'importe quel backend (à quelques choses près que l'on pourrait également refactoriser)
+# Puis depuis le code appelant
+map = Map(name='toto')
+gui = GraphicInterface(map)
+gui.game_loop()
